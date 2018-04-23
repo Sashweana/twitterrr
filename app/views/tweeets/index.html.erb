@@ -15,8 +15,10 @@
       <tr>
         <td><%= tweeet.tweeet %></td>
         <td><%= link_to 'Show', tweeet %></td>
-        <td><%= link_to 'Edit', edit_tweeet_path(tweeet) %></td>
-        <td><%= link_to 'Destroy', tweeet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if tweeet.user == current_user %>
+          <td><%= link_to 'Edit', edit_tweeet_path(tweeet) %></td>
+          <td><%= link_to 'Destroy', tweeet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +26,6 @@
 
 <br>
 
-<%= link_to 'New Tweeet', new_tweeet_path %>
+<% if current_user %>
+  <%= link_to 'New Tweeet', new_tweeet_path %>
+<% end %>
